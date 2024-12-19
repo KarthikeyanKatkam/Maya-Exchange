@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maya-backend-deployment
+  labels:
+    app: maya-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: maya-backend
+  template:
+    metadata:
+      labels:
+        app: maya-backend
+    spec:
+      containers:
+        - name: maya-backend
+          image: maya-exchange-backend:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: backend-config
+            - secretRef:
+                name: backend-secrets
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+        - name: maya-db
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: password
+            - name: POSTGRES_DB
+              value: maya_exchange

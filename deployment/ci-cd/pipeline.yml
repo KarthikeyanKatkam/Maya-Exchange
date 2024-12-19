@@ -1,0 +1,47 @@
+stages:
+  - name: build
+  - name: test
+  - name: deploy
+
+# Define build job
+build:
+  stage: build
+  image: node:18 # Use the appropriate Node.js version for your frontend
+  script:
+    - echo "Building the frontend"
+    - cd frontend
+    - npm install
+    - npm run build
+    - echo "Building the backend"
+    - cd ../backend
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - pip install -r requirements.txt
+  artifacts:
+    paths:
+      - frontend/dist
+      - backend/venv
+    expire_in: 1 hour
+
+# Define test job
+test:
+  stage: test
+  image: python:3.9
+  script:
+    - echo "Running backend tests"
+    - cd backend
+    - source venv/bin/activate
+    - pytest tests
+    - echo "Running frontend tests"
+    - cd ../frontend
+    - npm run test
+
+# Define deploy job
+deploy:
+  stage: deploy
+  image: node:18
+  script:
+    - echo "Deploying to AWS EC2 and S3"
+    - ./scripts/deploy.sh
+  only:
+    - master  # Trigger deploy only on the master branch
