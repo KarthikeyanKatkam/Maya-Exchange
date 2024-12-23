@@ -1,23 +1,22 @@
-# Use Python's official image as the base image
-FROM python:3.10-slim
+FROM python:3.10-slim-buster 
 
-# Set environment variables to avoid interactive prompts during installation
+# Set environment variables
 ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the requirements.txt file into the container
-COPY requirements.txt /app/
+# Copy requirements.txt and install dependencies
+COPY requirements.txt ./
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install -r requirements.txt
 
-# Install the Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy the rest of the application code
+COPY . .
 
-# Copy the rest of the application code into the container
-COPY . /app/
-
-# Expose the port the app will run on
+# Expose the port
 EXPOSE 8000
 
-# Command to run the FastAPI app with Uvicorn
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Define the command to run the application
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
