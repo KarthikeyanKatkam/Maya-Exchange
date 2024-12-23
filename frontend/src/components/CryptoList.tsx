@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import CryptoCard from './CryptoCard';
-const btcIcon = require('../assets/images/crypto-icons/btc.png');
-const ethIcon = require('../assets/images/crypto-icons/eth.png');
+import btcIcon from '../assets/images/crypto-icons/btc.png';
+import ethIcon from '../assets/images/crypto-icons/eth.png';
 
-const CryptoList: React.FC = () => {
+const CryptoList: FC = () => {
   const cryptoData = [
     { name: 'Bitcoin', symbol: 'BTC', price: 55000, change: 2.5, icon: btcIcon },
     { name: 'Ethereum', symbol: 'ETH', price: 4000, change: -1.2, icon: ethIcon },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FunctionComponent = () => {
   return (
     <div className="dashboard">
       <h2>Welcome to Your Dashboard</h2>

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Add your authentication logic here
     console.log('Logging in with:', email, password);
     // Redirect to dashboard or home page upon success
-    history.push('/dashboard');
+    navigate('/dashboard');
   };
 
   return (

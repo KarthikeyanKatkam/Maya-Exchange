@@ -18,7 +18,7 @@ class UserService:
         db.refresh(new_user)
         return new_user
 
-    def get_kyc_status(self, user_id: int) -> str:
+    def get_kyc_status(self, db: Session, user_id: int) -> str:
         # Retrieve the KYC status of the user
         user = db.query(User).filter(User.id == user_id).first()
         if not user:

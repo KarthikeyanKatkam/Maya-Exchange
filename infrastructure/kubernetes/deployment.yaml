@@ -48,3 +48,10 @@ spec:
                   key: password
             - name: POSTGRES_DB
               value: maya_exchange
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
