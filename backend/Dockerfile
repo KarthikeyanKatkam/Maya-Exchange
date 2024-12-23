@@ -1,8 +1,7 @@
 FROM python:3.10-slim-buster 
 
 # Set environment variables
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV key=1
 
 # Set the working directory
 WORKDIR /app
