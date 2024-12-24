@@ -14,7 +14,7 @@ COPY ../../backend/requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the backend code into the container
-COPY ../../backend /app
+COPY /home/kali/Desktop/Maya-Exchange/backend/requirements.txt /app
 
 # Expose the backend service port
 EXPOSE 8000
