@@ -17,6 +17,7 @@ Next-Gen Crypto Exchange
 6. [Deployment](#deployment)  
 7. [Scenarios](#scenarios)  
 8. [Additional Features](#additional-features)  
+9. [Starting the Application](#starting-the-application)
 
 ---
 
@@ -29,42 +30,41 @@ Next-Gen Crypto Exchange
 
 ---
 
-## **2. Core Features**
+## **9. Starting the Application**
 
-### **2.1 Trading Features**
-Maya Exchange offers all the advanced trading features typically found in top crypto exchanges like Binance, with additional customization for better user experience and access to more payment options like UPI.
+To start the application, follow these steps:
 
-#### **2.1.1 Spot Trading**  
-Trade between cryptocurrencies or between cryptocurrencies and fiat currencies on a simple exchange interface.  
+### Frontend
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies (if not already done):
+   ```bash
+   npm install
+   ```
+3. Start the frontend application:
+   ```bash
+   npm start
+   ```
 
-#### **2.1.2 Margin Trading**  
-Borrow funds to increase buying power and earn more profits from a smaller initial investment.  
+### Backend
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Install dependencies (if not already done):
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Start the backend application:
+   ```bash
+   uvicorn src.main:app --reload
+   ```
 
-#### **2.1.3 Futures Trading**  
-Access futures contracts to profit from the rise and fall of cryptocurrency prices. Support for both perpetual and delivery futures contracts.  
+Make sure to have the necessary environment variables set up as specified in the `.env` file.
 
-#### **2.1.4 Staking**  
-Stake crypto assets to earn rewards. Includes support for popular coins like Ethereum 2.0, Cardano, and Solana.  
-
-#### **2.1.5 Liquidity Farming**  
-Provide liquidity to trading pairs in return for platform rewards.  
-
-#### **2.1.6 Copy Trading**  
-Users can copy the trades of experienced traders and profit from their expertise.  
-
-#### **2.1.7 Grid Trading**  
-Automated trading system to buy low and sell high using preset price levels, ideal for market fluctuations.  
-
-#### **2.1.8 Token Launchpad (IEO)**  
-A platform for launching new crypto tokens and Initial Exchange Offerings (IEOs).  
-
-#### **2.1.9 OTC (Over-the-Counter) Trading**  
-Directly trade large volumes of crypto with institutional partners or large traders without using the regular exchange.  
-
-#### **2.1.10 Cross-platform Trading**  
-Integrated trading across web, mobile, and desktop platforms, ensuring seamless trading experiences.  
-
-#### **2.1.11 P2P Trading**  
+---
 - Peer-to-peer (P2P) trading where users can trade directly with each other using various fiat payment methods including UPI.  
 - **LocalCurrency-to-Crypto (LCC)**: Convert local fiat currencies directly into crypto.  
 - **Crypto-to-LocalCurrency (CLC)**: Sell crypto for local currencies instantly.  
