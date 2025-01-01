@@ -2,9 +2,9 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "skipLibCheck": true,
-    // other options...
     "jsx": "react",
-
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node"]
   },
   "include": ["/**/*"]
 }
