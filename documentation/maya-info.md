@@ -1,6 +1,3 @@
-================================================
-File: README.md
-================================================
 # **Maya Exchange - Crypto Exchange with UPI Payment Service Provider Integration**
 Next-Gen Crypto Exchange  
 
