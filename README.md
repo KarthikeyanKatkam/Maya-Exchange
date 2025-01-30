@@ -107,7 +107,7 @@ Make sure to have the necessary environment variables set up as specified in the
 - **Backend**: Node.tsx (Express.tsx), Python (FastAPI).  
 - **Blockchain**: Web3.tsx, Ethers.tsx, CoinGecko API.  
 - **Database**: PostgreSQL, MongoDB.  
-- **Infrastructure**: AWS, Docker, Kubernetes.  
+- **Infrastructure**: AWS, Podman, Kubernetes.  
 
 ---
 
