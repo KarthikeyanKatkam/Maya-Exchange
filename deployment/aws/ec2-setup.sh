@@ -11,13 +11,11 @@ sudo apt-get install -y git curl unzip
 curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
-# Install Docker (for containerization)
-sudo apt-get install -y docker.io
-sudo systemctl enable --now docker
+# Install Podman (for containerization)
+sudo apt-get install -y podman
 
-# Install Docker Compose (for managing multi-container Docker applications)
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+# Install Podman Compose (for managing multi-container Podman applications)
+sudo apt-get install -y podman-compose
 
 # Install Python (for the backend)
 sudo apt-get install -y python3-pip python3-dev
