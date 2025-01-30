@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const { cryptoToFiat, fiatToCrypto } = require("../protocols/conversion");
 
 const router = express.Router();
