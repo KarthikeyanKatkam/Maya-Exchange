@@ -261,21 +261,3 @@ We welcome contributions from the community! To contribute:
 1. Fork the repository.
 2. Create a new branch for your feature or bug fix.
 3. Submit a pull request with a detailed description of your changes.
-
-Please ensure your code adheres to the project's coding standards and includes appropriate tests.
-
----
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-If you have any questions or need further assistance, feel free to contact the maintainers:
-
-- **Name**: Karthikeyan Katkam  
-- **Phone**: +91 7981703460  
-- **Email**: karthikeyankatkam@yahoo.com  
-
----
