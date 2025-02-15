@@ -1,37 +1,49 @@
-import { useState, useEffect } from 'react';
-import Web3 from 'web3';
+import { useEffect, useState } from 'react';
+import { checkKYCStatus } from '../../services/kycService'; // Ensure this service exists and is correctly imported
 
-export interface Web2State {
-  web2: Web3 | null;
-  account: string | null;
+declare global {
+  interface Window {
+    ethereum: any; // Declare the ethereum property on the Window interface
+  }
 }
 
-export const useWeb2 = () => {
-  const [web2State, setWeb2State] = useState<Web2State>({
-    web2: null,
-    account: null
-  });
+const useWeb3 = () => {
+  const [account, setAccount] = useState<string | null>(null);
+  const [provider, setProvider] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [isKYCCompleted, setIsKYCCompleted] = useState<boolean>(false); // State for KYC status
 
   useEffect(() => {
-    const initWeb2 = async () => {
-      if (typeof window !== 'undefined' && (window as any).ethereum) {
-        const web3 = new Web3((window as any).ethereum);
-        try {
-          const accounts = await (window as any).ethereum.request({ 
-            method: 'eth_requestAccounts' 
-          });
-          setWeb2State({
-            web2: web3,
-            account: accounts[0] // Corrected index to 0
-          });
-        } catch (error) {
-          console.error('User denied account access');
+    const initWeb3 = async () => {
+      setIsLoading(true);
+      try {
+        if (typeof window !== 'undefined' && window.ethereum) {
+          const web3Provider = window.ethereum as unknown as { request: (args: { method: string }) => Promise<string[]> };
+          setProvider(web3Provider);
+          const accounts = await web3Provider.request({ method: 'eth_requestAccounts' });
+          setAccount(accounts[0]);
+
+          // Check KYC status after account is set
+          const kycStatus = await checkKYCStatus(accounts[0]);
+          setIsKYCCompleted(kycStatus); // Update KYC status
+        } else {
+          setError('Please install MetaMask!');
         }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    initWeb2();
+    initWeb3().catch(err => {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+      setIsLoading(false);
+    });
   }, []);
 
-  return web2State;
-}; 
+  return { account, provider, isLoading, error, isKYCCompleted }; // Return KYC status
+};
+
+export default useWeb3;
