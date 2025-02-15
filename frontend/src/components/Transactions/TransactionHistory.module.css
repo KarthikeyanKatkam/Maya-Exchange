@@ -1,0 +1,62 @@
+.transactionHistoryContainer {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transactionHistoryHeader {
+  font-size: 24px;
+  font-weight: bold;
+  color: #34495e;
+  margin-bottom: 15px;
+}
+
+.transactionItem {
+  padding: 15px;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+.transactionItem:hover {
+  background-color: #f1f1f1;
+}
+
+.transactionDate {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.transactionAmount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #27ae60; /* Green color for positive amounts */
+}
+
+.errorIndicator {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #d9534f; /* Red color for error messages */
+}
+
+.loadingSpinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

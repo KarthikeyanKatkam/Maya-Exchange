@@ -1,0 +1,197 @@
+/* Advanced Features Container */
+.advancedFeaturesContainer {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Feature Cards */
+.featureCard {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease-in-out;
+  border: 1px solid #e9ecef;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Feature Headers */
+.featureHeader {
+  color: #2c3e50;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Form Elements */
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formLabel {
+  color: #495057;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.formInput:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Tables */
+.tradingTable {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.tradingTable th {
+  background-color: #f1f3f5;
+  padding: 1rem;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.tradingTable td {
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Buttons */
+.actionButton {
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.primaryButton {
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  margin-top: 1rem;
+}
+
+.primaryButton:hover {
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  background-color: #6c757d;
+  color: #ffffff;
+  border: none;
+  min-width: 80px;
+  background-color: #6c757d;
+  color: #ffffff;
+  border: none;
+  min-width: 80px;
+}
+
+.secondaryButton:hover {
+  background-color: #545b62;
+}
+
+/* Status Indicators */
+.statusBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: #28a745;
+  color: #ffffff;
+}
+
+.successBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: #28a745;
+  color: #ffffff;
+}
+
+.warningBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.errorBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+/* Loading States */
+.loadingSpinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .advancedFeaturesContainer {
+    padding: 1rem;
+  }
+  
+  .featureCard {
+    padding: 1rem;
+  }
+  
+  .formInput {
+    padding: 0.5rem;
+  }
+  
+  .actionButton {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .tradingTable {
+    display: block;
+    overflow-x: auto;
+  }
+}
+/*  */

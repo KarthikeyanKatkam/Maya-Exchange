@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@types/web3": "^1.2.2",
+    "react": "^19.0.0",
+    "react-bootstrap": "^2.10.9",
+    "web3": "^4.16.0"
+  }
+}
