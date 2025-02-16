@@ -143,7 +143,7 @@ Maya Exchange is designed to address the limitations of existing cryptocurrency 
 
 ### Direct Competitors
 - **Global Players**: Binance, Coinbase, Kraken, Bitfinex
-- **Regional Players**: WazirX, CoinSwitch Kuber, Bitbns (India), Paxful (Global P2P)
+- **Regional Players**: WazirX, CoinSwitch Kuber, Bitbns (India), Paxful (Global P3P)
 
 ### Indirect Competitors
 - Payment Gateways: Stripe, Wise, PhonePe, GPay
