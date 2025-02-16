@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { fetchUserKYCStatus } from '../../services/kycService';
-import { useWeb2 as useWeb3 } from '../../hooks/useWeb3'; // Adjust the path as necessary
-import './MayaDEX.css'; // Assuming you have a CSS file for styling
+import { fetchUserKYCStatus } from '../../services/KYCService'; // Updated to match casing
+import useWeb2 from '../../hooks/useWeb3';
+import './MayaDEX.css';
+import useWeb3 from '../../hooks/useWeb3';
 
 const MayaDEX: React.FC = () => {
   const { account } = useWeb3();
@@ -19,7 +20,7 @@ const MayaDEX: React.FC = () => {
 
       try {
         const status = await fetchUserKYCStatus(account);
-        setKycStatus(status);
+        setKycStatus(status ? 'Completed' : 'Not Completed');
       } catch (err: any) {
         setError(err.message || 'Failed to fetch KYC status');
       } finally {

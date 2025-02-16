@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-bootstrap';
-import { useWeb2 as useWeb3 } from '../../hooks/useWeb3';
-import { fetchUserKYCStatus } from '../../services/kycService'; // Assuming this service exists
+import useWeb3 from '../../hooks/useWeb3';
+import { fetchUserKYCStatus } from '../../services/KYCService'; // Updated import to match casing
 
-const Dashboard: React.FC = () => {
+interface DashboardProps {
+  userId: string;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ userId }) => {
   const { account } = useWeb3();
   const [kycStatus, setKycStatus] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -19,7 +23,7 @@ const Dashboard: React.FC = () => {
 
       try {
         const status = await fetchUserKYCStatus(account);
-        setKycStatus(status);
+        setKycStatus(typeof status === 'string' ? status : '');
       } catch (err: any) {
         setError(err.message || 'Failed to fetch KYC status');
       } finally {

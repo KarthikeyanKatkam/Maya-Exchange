@@ -1,0 +1,17 @@
+# Use the following commands to build and run the application using Podman
+# Ensure that you are in the podman directory before executing these commands
+
+# Build the application
+podman build -t maya-exchange:latest .
+
+# Run the application
+podman run -d --name maya-exchange-service \
+  -e DB_USERNAME=${DB_USERNAME} \
+  -e DB_PASSWORD=${DB_PASSWORD} \
+  -e API_KEY=${API_KEY} \
+  -e JWT_SECRET=${JWT_SECRET} \
+  -p 5000:5000 \
+  --network maya-network \
+  maya-exchange:latest
+
+# Note: Ensure that the environment variables are set in your shell or .env file

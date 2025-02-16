@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maya-exchange
+  namespace: maya-exchange
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: maya-exchange
+  template:
+    metadata:
+      labels:
+        app: maya-exchange
+    spec:
+      containers:
+      - name: maya-exchange
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+        env:
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: maya-exchange-config
+              key: NODE_ENV
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: maya-exchange-config
+              key: DATABASE_URL
+        - name: API_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: maya-exchange-config
+              key: API_BASE_URL
+        - name: KYC_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: maya-exchange-config
+              key: KYC_SERVICE_URL
+        - name: USER_ACCESSIBLE_FEATURES
+          valueFrom:
+            configMapKeyRef:
+              name: maya-exchange-config
+              key: USER_ACCESSIBLE_FEATURES
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            configMapKeyRef:
+              name: maya-exchange-config
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: maya-exchange-config
+              key: AWS_SECRET_ACCESS_KEY
+        - name: AWS_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: maya-exchange-config
+              key: AWS_REGION
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            configMapKeyRef:
+              name: maya-exchange-config
+              key: KUBERNETES_NAMESPACE

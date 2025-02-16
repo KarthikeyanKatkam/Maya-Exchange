@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: maya-exchange-config
+data:
+  NODE_ENV: "development"
+  DATABASE_URL: "mongodb://localhost:27017/maya_exchange"
+  API_BASE_URL: "http://localhost:5000/api"
+  KYC_SERVICE_URL: "http://localhost:5000/kyc"
+  USER_ACCESSIBLE_FEATURES: "true"
+  AWS_ACCESS_KEY_ID: "<your_access_key>"
+  AWS_SECRET_ACCESS_KEY: "<your_secret_key>"
+  AWS_REGION: "us-west-2"
+  DOCKER_IMAGE: "maya-exchange:latest"
+  KUBERNETES_NAMESPACE: "maya-exchange"

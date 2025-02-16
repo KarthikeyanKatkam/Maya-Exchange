@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useWeb2 as useWeb3 } from '../../hooks/useWeb3'; // Adjust the import path as necessary
-import { fetchUserKYCStatus } from '../../services/kycService';
+import useWeb3 from '../../hooks/useWeb3'; // Adjust the import path as necessary
+import { fetchUserKYCStatus } from '../../services/KYCService'; // Updated to match casing
 import './MayaLaunchpad.css'; // Assuming you have a CSS file for styling
 
 const MayaLaunchpad: React.FC = () => {
@@ -19,7 +19,7 @@ const MayaLaunchpad: React.FC = () => {
 
       try {
         const status = await fetchUserKYCStatus(account);
-        setKycStatus(status);
+        setKycStatus(status ? 'Completed' : 'Not Completed');
       } catch (err: any) {
         setError(err.message || 'Failed to fetch KYC status');
       } finally {

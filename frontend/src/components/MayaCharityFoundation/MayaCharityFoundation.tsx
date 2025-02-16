@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useWeb2 as useWeb3 } from '../../hooks/useWeb3';
-import { fetchUserKYCStatus } from '../../services/kycService';
+import useWeb3 from '../../hooks/useWeb3';
+import { fetchUserKYCStatus } from '../../services/KYCService'; // Updated to match casing
 import './MayaCharityFoundation.css'; // Assuming you have a CSS file for styling
 
 const MayaCharityFoundation: React.FC = () => {
@@ -19,7 +19,7 @@ const MayaCharityFoundation: React.FC = () => {
 
       try {
         const status = await fetchUserKYCStatus(account);
-        setKycStatus(status);
+        setKycStatus(typeof status === 'string' ? status : '');
       } catch (err: any) {
         setError(err.message || 'Failed to fetch KYC status');
       } finally {

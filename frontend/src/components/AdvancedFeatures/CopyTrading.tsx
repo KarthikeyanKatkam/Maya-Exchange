@@ -1,6 +1,7 @@
+// components/AdvancedFeatures/CopyTrading.tsx
 import React, { useState, useEffect } from 'react';
 import { Card, Form, Button, Alert, Table } from 'react-bootstrap';
-import { useWeb2 } from '../../hooks/useWeb3';
+import useWeb3 from '../../hooks/useWeb3';
 import { CopyTradingService } from '../../services/copyTrading.service';
 import { formatCurrency } from '../../utils/formatters';
 
@@ -15,8 +16,7 @@ const CopyTrading: React.FC<CopyTradingProps> = ({ tradingPair }) => {
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const { account } = useWeb2();
+  const { account } = useWeb3();
   const copyTradingService = new CopyTradingService();
 
   useEffect(() => {
@@ -37,15 +37,12 @@ const CopyTrading: React.FC<CopyTradingProps> = ({ tradingPair }) => {
     setError('');
     setSuccess('');
     setIsLoading(true);
-
     try {
       if (!selectedTrader || amount <= 0) {
         throw new Error('Please select a trader and enter a valid amount');
       }
-
       await copyTradingService.startCopyTrading(selectedTrader, amount, tradingPair);
       setSuccess('Successfully started copy trading');
-      
     } catch (err: any) {
       setError(err.message || 'Failed to start copy trading');
     } finally {
@@ -61,7 +58,6 @@ const CopyTrading: React.FC<CopyTradingProps> = ({ tradingPair }) => {
       <Card.Body>
         {error && <Alert variant="danger">{error}</Alert>}
         {success && <Alert variant="success">{success}</Alert>}
-
         <Form onSubmit={handleCopyTrading}>
           <Form.Group className="mb-3">
             <Form.Label>Select Trader</Form.Label>
@@ -77,7 +73,6 @@ const CopyTrading: React.FC<CopyTradingProps> = ({ tradingPair }) => {
               ))}
             </Form.Select>
           </Form.Group>
-
           <Form.Group className="mb-3">
             <Form.Label>Investment Amount</Form.Label>
             <Form.Control
@@ -88,7 +83,6 @@ const CopyTrading: React.FC<CopyTradingProps> = ({ tradingPair }) => {
               step="0.01"
             />
           </Form.Group>
-
           <Button 
             type="submit" 
             variant="primary"
@@ -97,7 +91,6 @@ const CopyTrading: React.FC<CopyTradingProps> = ({ tradingPair }) => {
             {isLoading ? 'Starting...' : 'Start Copy Trading'}
           </Button>
         </Form>
-
         <Table className="mt-4" striped bordered hover>
           <thead>
             <tr>
@@ -111,9 +104,9 @@ const CopyTrading: React.FC<CopyTradingProps> = ({ tradingPair }) => {
             {traders.map((trader) => (
               <tr key={trader.id}>
                 <td>{trader.name}</td>
-                <td>{trader.successRate}%</td>
-                <td>{formatCurrency(trader.totalProfit)}</td>
-                <td>{trader.followers}</td>
+                <td>{trader.successRate.toFixed(2)}%</td>
+                <td>{formatCurrency(String(trader.totalProfit), 2)}</td>
+                <td>{trader.followers.toLocaleString()}</td>
               </tr>
             ))}
           </tbody>

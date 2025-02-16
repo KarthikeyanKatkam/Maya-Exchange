@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './UserProfile.css'; // Assuming you have a CSS file for styling
 
-const UserProfile: React.FC = () => {
+interface UserProfileProps {
+  userId: string;
+}
+
+const UserProfile: React.FC<UserProfileProps> = ({ userId }) => {
   const [userData, setUserData] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,6 +43,7 @@ const UserProfile: React.FC = () => {
           {/* Add more user details as needed */}
         </div>
       )}
+      <p>User ID: {userId}</p>
     </div>
   );
 };

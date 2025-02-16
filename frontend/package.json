@@ -1,0 +1,31 @@
+{
+  "name": "maya-exchange-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for the Maya Exchange application",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/jest-dom": "^5.14.1"
+  },
+  "devDependencies": {
+    "jest": "^26.6.0",
+    "babel-jest": "^26.6.0"
+  },
+  "keywords": [
+    "Maya",
+    "Exchange",
+    "KYC",
+    "User-Accessible-Features"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useWeb3 } from '../../hooks/useWeb3';
-import { fetchUserKYCStatus } from '../../services/kycService';
+import useWeb3 from '../../hooks/useWeb3';
+import { fetchUserKYCStatus } from '../../services/KYCService';
 import './NotificationSettings.css'; // Assuming you have a CSS file for styling
 
 const NotificationSettings: React.FC = () => {
@@ -20,7 +20,7 @@ const NotificationSettings: React.FC = () => {
 
       try {
         const status = await fetchUserKYCStatus(account);
-        setKycStatus(status);
+        setKycStatus(status ? 'Completed' : 'Not Completed');
       } catch (err: any) {
         setError(err.message || 'Failed to fetch KYC status');
       } finally {
@@ -33,7 +33,6 @@ const NotificationSettings: React.FC = () => {
 
   const handleNotificationToggle = () => {
     setNotificationsEnabled(!notificationsEnabled);
-    // Here you would typically also save the notification preference to user settings
   };
 
   return (

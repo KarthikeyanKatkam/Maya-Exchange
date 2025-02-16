@@ -1,10 +1,35 @@
 import React, { useEffect, useState } from 'react';
+import useWeb3 from '../../hooks/useWeb3';
+import { fetchUserKYCStatus } from '../../services/KYCService'; // Updated to match casing
 import './SpotTrading.css'; // Assuming you have a CSS file for styling
 
 const SpotTrading: React.FC = () => {
+  const { account } = useWeb3();
   const [spotData, setSpotData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [kycStatus, setKycStatus] = useState<string>('');
+
+  useEffect(() => {
+    const checkKYCStatus = async () => {
+      if (!account) {
+        setError('Please connect your wallet to check KYC status.');
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const status = await fetchUserKYCStatus(account);
+        setKycStatus(status ? 'Completed' : 'Not Completed');
+      } catch (err: any) {
+        setError(err.message || 'Failed to fetch KYC status');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkKYCStatus();
+  }, [account]);
 
   useEffect(() => {
     const fetchSpotData = async () => {

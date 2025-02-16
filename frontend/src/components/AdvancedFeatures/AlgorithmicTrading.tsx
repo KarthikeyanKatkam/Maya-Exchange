@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Form, Button, Alert, Table } from 'react-bootstrap';
-import { useWeb2 as useWeb3 } from '../../hooks/useWeb3';
+import { useWeb2 } from '../../hooks/useWeb2';
+import useWeb3 from '../../hooks/useWeb3';
 import { AlgorithmicTradingService } from '../../services/algorithmicTrading.service';
 import { formatCurrency } from '../../utils/formatters';
 import styles from './AdvancedFeatures.module.css';
@@ -19,8 +20,7 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const { account } = useWeb3();
+  const { account } = useWeb2();
   const algoTradingService = new AlgorithmicTradingService();
 
   useEffect(() => {
@@ -45,16 +45,13 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
     setError('');
     setSuccess('');
     setIsLoading(true);
-
     try {
       if (!account) {
         throw new Error('Please connect your wallet');
       }
-
       if (!strategy) {
         throw new Error('Please select a trading strategy');
       }
-
       const result = await algoTradingService.createStrategy({
         account,
         tradingPair,
@@ -62,9 +59,8 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
         investment,
         timeframe,
         stopLoss,
-        takeProfit
+        takeProfit,
       });
-
       setSuccess('Trading strategy created successfully');
       loadActiveStrategies();
     } catch (err: any) {
@@ -92,11 +88,10 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
       <Card.Body>
         {error && <Alert variant="danger">{error}</Alert>}
         {success && <Alert variant="success">{success}</Alert>}
-
         <Form onSubmit={handleSubmit}>
           <Form.Group className={styles.formGroup}>
             <Form.Label className={styles.formLabel}>Trading Strategy</Form.Label>
-            <Form.Select 
+            <Form.Select
               className={styles.formInput}
               value={strategy}
               onChange={(e) => setStrategy(e.target.value)}
@@ -109,7 +104,6 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
               <option value="MA">Moving Average Crossover</option>
             </Form.Select>
           </Form.Group>
-
           <Form.Group className={styles.formGroup}>
             <Form.Label className={styles.formLabel}>Investment Amount</Form.Label>
             <Form.Control
@@ -121,7 +115,6 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
               min={0}
             />
           </Form.Group>
-
           <Form.Group className={styles.formGroup}>
             <Form.Label className={styles.formLabel}>Timeframe</Form.Label>
             <Form.Select
@@ -138,7 +131,6 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
               <option value="1d">1 day</option>
             </Form.Select>
           </Form.Group>
-
           <Form.Group className={styles.formGroup}>
             <Form.Label className={styles.formLabel}>Stop Loss (%)</Form.Label>
             <Form.Control
@@ -151,7 +143,6 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
               max={100}
             />
           </Form.Group>
-
           <Form.Group className={styles.formGroup}>
             <Form.Label className={styles.formLabel}>Take Profit (%)</Form.Label>
             <Form.Control
@@ -163,9 +154,8 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
               min={0}
             />
           </Form.Group>
-
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             className={styles.primaryButton}
             disabled={isLoading}
           >
@@ -179,9 +169,7 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
             )}
           </Button>
         </Form>
-
         <hr />
-
         <h5 className={styles.featureHeader}>Active Strategies</h5>
         <div className={styles.tradingTable}>
           <Table striped bordered hover responsive>
@@ -198,10 +186,10 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
               {activeStrategies.map((strat) => (
                 <tr key={strat.id}>
                   <td>{strat.strategy}</td>
-                  <td>{formatCurrency(strat.investment)}</td>
+                  <td>{formatCurrency(strat.investment.toString(), 2)}</td>
                   <td>{strat.timeframe}</td>
                   <td className={strat.pl >= 0 ? styles.successBadge : styles.errorBadge}>
-                    {formatCurrency(strat.pl)}
+                    {formatCurrency(strat.pl.toString(), 2)}
                   </td>
                   <td>
                     <Button
@@ -224,4 +212,3 @@ const AlgorithmicTrading: React.FC<AlgorithmicTradingProps> = ({ tradingPair }) 
 };
 
 export default AlgorithmicTrading;
-

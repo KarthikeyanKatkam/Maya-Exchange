@@ -1,6 +1,7 @@
+// components/AdvancedFeatures/GridTrading.tsx
 import React, { useState, useEffect } from 'react';
 import { Card, Form, Button, Alert, Table } from 'react-bootstrap';
-import { useWeb2 } from '../../hooks/useWeb3';
+import useWeb3 from '../../hooks/useWeb3';
 import { GridTradingService } from '../../services/gridTrading.service';
 import { formatCurrency } from '../../utils/formatters';
 
@@ -17,8 +18,7 @@ const GridTrading: React.FC<GridTradingProps> = ({ tradingPair }) => {
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const { account } = useWeb2();
+  const { account } = useWeb3();
   const gridTradingService = new GridTradingService();
 
   useEffect(() => {
@@ -43,20 +43,16 @@ const GridTrading: React.FC<GridTradingProps> = ({ tradingPair }) => {
     setError('');
     setSuccess('');
     setIsLoading(true);
-
     try {
       if (!account) {
         throw new Error('Please connect your wallet');
       }
-
       if (upperPrice <= lowerPrice) {
         throw new Error('Upper price must be greater than lower price');
       }
-
       if (gridLines < 3) {
         throw new Error('Minimum 2 grid lines required');
       }
-
       const gridParams = {
         upperPrice,
         lowerPrice,
@@ -65,7 +61,6 @@ const GridTrading: React.FC<GridTradingProps> = ({ tradingPair }) => {
         tradingPair,
         account
       };
-
       await gridTradingService.createGridStrategy(gridParams);
       setSuccess('Grid trading strategy created successfully');
       loadActiveGrids();
@@ -84,7 +79,6 @@ const GridTrading: React.FC<GridTradingProps> = ({ tradingPair }) => {
       <Card.Body>
         {error && <Alert variant="danger">{error}</Alert>}
         {success && <Alert variant="success">{success}</Alert>}
-
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Label>Upper Price</Form.Label>
@@ -95,7 +89,6 @@ const GridTrading: React.FC<GridTradingProps> = ({ tradingPair }) => {
               required
             />
           </Form.Group>
-
           <Form.Group className="mb-3">
             <Form.Label>Lower Price</Form.Label>
             <Form.Control
@@ -105,7 +98,6 @@ const GridTrading: React.FC<GridTradingProps> = ({ tradingPair }) => {
               required
             />
           </Form.Group>
-
           <Form.Group className="mb-3">
             <Form.Label>Number of Grid Lines</Form.Label>
             <Form.Control
@@ -116,7 +108,6 @@ const GridTrading: React.FC<GridTradingProps> = ({ tradingPair }) => {
               min="3"
             />
           </Form.Group>
-
           <Form.Group className="mb-3">
             <Form.Label>Total Investment</Form.Label>
             <Form.Control
@@ -126,12 +117,10 @@ const GridTrading: React.FC<GridTradingProps> = ({ tradingPair }) => {
               required
             />
           </Form.Group>
-
           <Button type="submit" disabled={isLoading}>
             {isLoading ? 'Creating Grid...' : 'Create Grid Strategy'}
           </Button>
         </Form>
-
         {activeGrids.length > 0 && (
           <div className="mt-4">
             <h6>Active Grid Positions</h6>
@@ -150,11 +139,11 @@ const GridTrading: React.FC<GridTradingProps> = ({ tradingPair }) => {
                 {activeGrids.map((grid, index) => (
                   <tr key={index}>
                     <td>{grid.tradingPair}</td>
-                    <td>{formatCurrency(grid.upperPrice)}</td>
-                    <td>{formatCurrency(grid.lowerPrice)}</td>
+                    <td>{formatCurrency(grid.upperPrice.toString(), 2)}</td>
+                    <td>{formatCurrency(grid.lowerPrice.toString(), 2)}</td>
                     <td>{grid.gridLines}</td>
-                    <td>{formatCurrency(grid.investment)}</td>
-                    <td>{formatCurrency(grid.pnl)}</td>
+                    <td>{formatCurrency(grid.investment.toString(), 2)}</td>
+                    <td>{formatCurrency(grid.pnl.toString(), 2)}</td>
                   </tr>
                 ))}
               </tbody>

@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-import { useWeb2 as useWeb3 } from '../../hooks/useWeb3';
+import { Card, Form, Button, Alert } from 'react-bootstrap';
+import useWeb3 from '../../hooks/useWeb3';
+import { CurrencyConversionService } from '../../services/currencyConversion.service'; // Assuming a service for currency conversion exists
 
-const ConvertCurrency: React.FC = () => {
+interface ConvertCurrencyProps {
+  convert?: () => void;
+}
+
+const ConvertCurrency: React.FC<ConvertCurrencyProps> = ({ convert }) => {
   const [amount, setAmount] = useState<number>(0);
+  const [fromCurrency, setFromCurrency] = useState<string>('USD');
+  const [toCurrency, setToCurrency] = useState<string>('EUR');
+  const [convertedAmount, setConvertedAmount] = useState<number | null>(null);
   const [error, setError] = useState<string>('');
-  const [success, setSuccess] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { account } = useWeb3();
 
   const handleConversion = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setSuccess('');
+    setConvertedAmount(null);
     setIsLoading(true);
 
     try {
@@ -21,52 +28,74 @@ const ConvertCurrency: React.FC = () => {
       }
 
       if (amount <= 0) {
-          if (amount <= 0) {
-            setError('Amount must be greater than zero');
-            setIsLoading(false);
-            return;
-          }
-        }
-        const kycService = await import('../../services/kycService');
-        const isKYCCompleted = await kycService.checkKYCStatus(account);
-        if (!isKYCCompleted) {
-          setError('KYC verification is required to proceed with the conversion');
-          setIsLoading(false);
-          return;
-        }
+        throw new Error('Amount must be greater than zero');
+      }
 
-      // Process the currency conversion (this is a placeholder for actual conversion logic)
-      // await currencyService.convertCurrency(account, amount);
-
-      setSuccess('Currency converted successfully');
+      const result = await CurrencyConversionService.convertCurrency(amount, fromCurrency, toCurrency);
+      setConvertedAmount(result);
     } catch (err: any) {
       setError(err.message || 'Failed to convert currency');
     } finally {
       setIsLoading(false);
     }
+
+    if (convert) {
+      convert();
+    }
   };
 
   return (
-    <div className="convertCurrencyContainer">
-      <h2>Convert Currency</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
-      {success && <Alert variant="success">{success}</Alert>}
-
-      <Form onSubmit={handleConversion}>
-        <Form.Group className="form-group">
-          <Form.Label>Amount</Form.Label>
-          <Form.Control
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
-            required
-          />
-        </Form.Group>
-        <Button type="submit" className="btn-submit" disabled={isLoading}>
-          {isLoading ? 'Converting...' : 'Convert'}
-        </Button>
-      </Form>
-    </div>
+    <Card className="mb-3">
+      <Card.Header>
+        <h5>Convert Currency</h5>
+      </Card.Header>
+      <Card.Body>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {convertedAmount !== null && (
+          <Alert variant="success">Converted Amount: {convertedAmount.toFixed(2)} {toCurrency}</Alert>
+        )}
+        <Form onSubmit={handleConversion}>
+          <Form.Group className="mb-3">
+            <Form.Label>Amount</Form.Label>
+            <Form.Control
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(Number(e.target.value))}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>From Currency</Form.Label>
+            <Form.Control
+              as="select"
+              value={fromCurrency}
+              onChange={(e) => setFromCurrency(e.target.value)}
+            >
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              {/* Add more currencies as needed */}
+            </Form.Control>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>To Currency</Form.Label>
+            <Form.Control
+              as="select"
+              value={toCurrency}
+              onChange={(e) => setToCurrency(e.target.value)}
+            >
+              <option value="EUR">EUR</option>
+              <option value="USD">USD</option>
+              <option value="GBP">GBP</option>
+              {/* Add more currencies as needed */}
+            </Form.Control>
+          </Form.Group>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? 'Converting...' : 'Convert'}
+          </Button>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 };
 

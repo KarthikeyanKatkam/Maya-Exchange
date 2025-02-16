@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './TransactionHistory.css'; // Assuming you have a CSS file for styling
 
-const TransactionHistory: React.FC = () => {
+interface TransactionHistoryProps {
+  userId: string; // Define the userId prop
+}
+
+const TransactionHistory: React.FC<TransactionHistoryProps> = ({ userId }) => {
   const [transactions, setTransactions] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

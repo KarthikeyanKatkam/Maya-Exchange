@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Card, Form, Button, Alert } from 'react-bootstrap';
-import { useWeb2 } from '../../hooks/useWeb3';
-// Removed KYCService import due to lint error
+import useWeb2 from '../../hooks/useWeb3'; // Fixed import statement
 const UpiPayment: React.FC = () => {
   const [amount, setAmount] = useState<number>(0);
   const [error, setError] = useState<string>('');
-  const [success, setSuccess] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { account } = useWeb2();
+  const [success, setSuccess] = useState<string>(''); // Added success state initialization
+  const [isLoading, setIsLoading] = useState<boolean>(false); // Added loading state initialization
+  const { account } = useWeb2(); // Removed duplicate declaration
   const kycService = new (require('../../services/KYCService')).default();
 
   const handlePayment = async (e: React.FormEvent) => {

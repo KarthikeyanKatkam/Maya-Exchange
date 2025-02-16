@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useWeb2 as useWeb3 } from '../../hooks/useWeb3';
-import { fetchUserKYCStatus } from '../../services/kycService';
+import useWeb2 from '../../hooks/useWeb3';
+import { fetchUserKYCStatus } from '../../services/KYCService';
 import styles from './DeFi.module.css';
 
 const DeFiIntegration: React.FC = () => {
-  const { account } = useWeb3();
+  const { account } = useWeb2();
   const [kycStatus, setKycStatus] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -19,7 +19,7 @@ const DeFiIntegration: React.FC = () => {
 
       try {
         const status = await fetchUserKYCStatus(account);
-        setKycStatus(status);
+        setKycStatus(typeof status === 'string' ? status : '');
       } catch (err: any) {
         setError(err.message || 'Failed to fetch KYC status');
       } finally {
