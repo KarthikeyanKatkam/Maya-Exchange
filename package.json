@@ -16,5 +16,11 @@
     "@types/jest": "^29.5.14",
     "@types/testing-library__react": "^10.2.0",
     "@types/validator": "^13.12.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   }
 }
