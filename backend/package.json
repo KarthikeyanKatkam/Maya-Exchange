@@ -2,7 +2,7 @@
   "name": "maya-exchange-backend",
   "version": "1.0.0",
   "description": "Backend services for Maya Exchange platform",
-  "main": "src/server.js",
+  "main": "src/server.cs",
   "scripts": {
     "start": "dotnet run",
     "build": "dotnet build",
@@ -45,5 +45,11 @@
     "url": "https://github.com/maya-exchange/backend"
   },
   "author": "Maya Exchange Team",
-  "license": "MIT"
+  "license": "MIT",
+  "json.schemas": [
+    {
+      "fileMatch": ["package.json"],
+      "url": "./schemas/package.json"
+    }
+  ]
 }

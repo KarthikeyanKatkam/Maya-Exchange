@@ -1,0 +1,51 @@
+.kyc-status {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: green;
+}
+
+.text-danger {
+    color: red;
+}
+
+.accessible-features {
+    margin-top: 20px;
+}
+
+.accessible-features h5 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.accessible-features ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.accessible-features li {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.send-currency-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.send-currency-button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}

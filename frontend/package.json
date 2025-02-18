@@ -1,6 +1,8 @@
 {
+  "$schema": "./package-schema.json",
   "name": "maya-exchange-frontend",
   "version": "1.0.0",
+  "type": "module",
   "description": "Frontend for the Maya Exchange application",
   "main": "index.js",
   "scripts": {

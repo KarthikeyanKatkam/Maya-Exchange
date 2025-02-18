@@ -1,0 +1,18 @@
+{
+    "$schema": "./package-schema.json",
+    "schemaType": "object",  
+    "properties": {
+      "name": { "type": "string" },
+      "version": { "type": "string" },
+      "description": { "type": "string" },
+      "main": { "type": "string" },
+      "scripts": { "type": "object" },
+      "dependencies": { "type": "object" },
+      "devDependencies": { "type": "object" },
+      "keywords": { "type": "array" },
+      "author": { "type": "string" },
+      "license": { "type": "string" },
+      "type": { "enum": ["commonjs", "module"] } 
+    },
+    "required": ["name", "version"]
+  }

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/package",
+  "type": "object",
+  "properties": {
+    "dependencies": {
+      "type": "object"
+    },
+    "devDependencies": {
+      "type": "object"
+    },
+    "scripts": {
+      "type": "object"
+    }
+  }
+} 
